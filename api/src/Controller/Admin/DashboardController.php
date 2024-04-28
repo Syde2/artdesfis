@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Produits;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -42,8 +45,15 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Tableau de Bord', 'fa fa-home');
+        yield MenuItem::linkToDashboard('Tableau de Bord', 'fa fa-dashboard');
         
         yield MenuItem::linkToCrud('Produits', 'fas fa-list',Produits::class);
+    }
+
+    public function configureActions(): Actions
+    {
+        return parent::configureActions()
+        ->add(Crud ::PAGE_INDEX, Action::DETAIL);
+        
     }
 }

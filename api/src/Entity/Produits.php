@@ -28,14 +28,14 @@ class Produits
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $collection = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2, nullable: true)]
     private ?string $prix = null;
 
     #[ORM\Column]
-    private ?bool $visible = null;
+    private ?bool $visible = true;
 
     #[ORM\Column]
-    private ?int $stock = null;
+    private ?int $stock = 1;
 
     public function getId(): ?int
     {
