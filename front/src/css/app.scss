@@ -1,1 +1,15 @@
 // app global css in SCSS form
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+:root{
+  color: rgb(36, 36, 36);
+
+}
+h2{
+  font-size:18vw;
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
