@@ -1,19 +1,22 @@
-{# {% extends 'base.html.twig' %} #}
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
+{% block page_title %}
+  Tableau de Bord des Articles
+{% endblock %}
 
-{# {% block title %}Page Couture{% endblock %}
+{% block main %}
+    <div class="row">
+        <div class="col-6">
+        <ul>
+            <li> Nombre d'Articles enregistrés : {{totalArticles}} </li>
+            <li> Nombre d'Articles visibles : {{totalVisible}} </li>
+            <li> Nombre d'Articles en Rupture de Stock : {{totalRuptureStock}} </li>
+        </ul>
+      
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h1> L'Art des Fils  !</h1>
-                <p> Gestion des stocks</p>
-            </div>
-            <div class="col-md-6">
-                <img src="{{ asset('images/couture_illustration.jpg') }}" alt="Illustration Couture" class="img-fluid">
-            </div>
+        </div>
+        <div class="col-6">
+  
         </div>
     </div>
-{% endblock %} #}
+{% endblock %}

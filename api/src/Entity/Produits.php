@@ -8,6 +8,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProduitsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 #[ApiResource(shortName :'Produit')]
 class Produits
 {
@@ -124,5 +125,10 @@ class Produits
         $this->stock = $stock;
 
         return $this;
+    }
+    #[ORM\PostUpdate]
+    public function setDemoPrice(): void
+    {
+        $this->setPrix('3333');
     }
 }
