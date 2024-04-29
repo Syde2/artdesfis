@@ -16,13 +16,13 @@
     RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
     # RewriteBase
-    RewriteBase /
+    #RewriteBase /
 
     # Rediriger l'accès à la racine du site vers le dossier "front"
     RewriteRule ^$ /front/ [L]
 
     # Rediriger l'accès à "/api" vers le dossier "api"
-    RewriteRule ^api(/.*|$) /api$1 [L]
+    RewriteRule ^api(/.*|$) /api/$1 [L]
 
     # Rediriger toutes les autres requêtes vers le dossier "front"
     RewriteCond %{REQUEST_URI} !^/(front|api)

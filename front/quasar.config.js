@@ -3,7 +3,7 @@
 const { configure } = require('quasar/wrappers');
 const path = require('path');
 
-module.exports = configure(function (/* ctx */) {
+module.exports = configure(function (ctx) {
   return {
 
 
@@ -54,7 +54,11 @@ module.exports = configure(function (/* ctx */) {
        publicPath: '/',
        productName:'Art des fils ',
       // analyze: true,
-      // env: {},
+      env: {
+        API: ctx.dev
+        ? 'https://localhost:8000'
+        : 'https://demo.artdesfils.fr/api/public/api/'
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
