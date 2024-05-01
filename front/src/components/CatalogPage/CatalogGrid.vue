@@ -1,6 +1,7 @@
 <script setup>
 import {onBeforeMount, ref } from 'vue'
 import {unsplash} from 'src/boot/unsplash.js'
+import CatalogItem from 'src/components/CatalogPage/CatalogItem.vue'
 
 const number = 40
 const photos = ref()
@@ -19,7 +20,8 @@ onBeforeMount( async ()=>{
 
   <main class="grid">
     <div class="item"  v-for="each in photos" :key="each.id" >
-      <img :src="each.urls.thumb"  width="100%" height="auto"/>
+      <CatalogItem :article="each" />
+      <!-- <img :src="each.urls.thumb"  width="100%" height="auto"/> -->
     </div>
   </main>
 
@@ -42,5 +44,6 @@ onBeforeMount( async ()=>{
   background-color: oklch(28% 0.02 270);
   border-radius: 4px;
   color: aliceblue;
+  cursor: pointer;
 }
 </style>
