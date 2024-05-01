@@ -23,6 +23,7 @@ api/.thumbs.db
 */src-cordova/platforms
 */src-cordova/plugins
 */src-cordova/www
+*/front/dist
 
 # Capacitor related directories and files
 */src-capacitor/www

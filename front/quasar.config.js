@@ -16,6 +16,7 @@ module.exports = configure(function (ctx) {
     boot: [
       'i18n',
       'axios',
+      'unsplash'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -56,7 +57,7 @@ module.exports = configure(function (ctx) {
       // analyze: true,
       env: {
         API: ctx.dev
-        ? 'https://localhost:8000'
+        ? 'https://localhost:8000/api'
         : 'https://demo.artdesfils.fr/api/public/api/'
       },
       // rawDefine: {}
