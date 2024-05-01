@@ -27,6 +27,8 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        
         $total = count( $this->produitRepository->findAll());
         $visible = count( $this->produitRepository->findBy(array('visible' => True)));
         $ruptureStock = count( $this->produitRepository->findBy(array('stock' => 0)));
