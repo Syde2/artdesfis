@@ -2,6 +2,11 @@
 import {onBeforeMount, ref } from 'vue'
 import {unsplash} from 'src/boot/unsplash.js'
 import CatalogItem from 'src/components/CatalogPage/CatalogItem.vue'
+import UnsplashItem from './UnsplashItem.vue';
+
+const props = defineProps({
+  produits : Array
+})
 
 const number = 40
 const photos = ref()
@@ -19,9 +24,12 @@ onBeforeMount( async ()=>{
 <template>
 
   <main class="grid">
-    <div class="item"  v-for="each in photos" :key="each.id" >
+    <div class="item"  v-for="each in produits" :key="each.id" >
       <CatalogItem :article="each" />
-      <!-- <img :src="each.urls.thumb"  width="100%" height="auto"/> -->
+    </div>
+
+    <div class="item"  v-for="each in photos" :key="each.id" >
+      <UnsplashItem :article="each" />
     </div>
   </main>
 

@@ -11,7 +11,6 @@ const props = defineProps({
 
 const popup = ref(false)
 const isFav = ref(false)
-const imageUrl = process.env.API+'/uploads/images/'+props.article.imageUrl
 
 function handleClick() {
   console.log('Handle click')
@@ -28,14 +27,14 @@ function handleFav(){
 <template>
 
   <div @click=handleClick>
-    <img :src="imageUrl" width="100%" height="auto" />
+    <img :src="article.urls.thumb" width="100%" height="auto" />
   </div>
 
   <q-dialog v-model="popup"  backdrop-filter="blur(4px) saturate(150%)"  >
     <q-card  style="width: 450px">
-      <q-img :src="imageUrl" fit="contain"  />
+      <q-img :src="props.article.urls.regular" fit="contain"  />
       <div class="item-actions">
-        <div class="item-legend "> {{props.article.description}} </div>
+        <div class="item-legend "> {{props.article.alt_description }} </div>
         <div class="full-width flex justify-around">
           <MailButton :id="props.article.id" />
           <ShareButton />

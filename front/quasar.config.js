@@ -57,7 +57,7 @@ module.exports = configure(function (ctx) {
       // analyze: true,
       env: {
         API: ctx.dev
-        ? 'https://localhost:8000/api'
+        ? 'https://localhost:8000'
         : 'https://demo.artdesfils.fr/api/public/api/'
       },
       // rawDefine: {}
