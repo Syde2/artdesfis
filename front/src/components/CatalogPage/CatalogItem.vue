@@ -1,9 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import MailButton from './MailButton.vue';
-import ShareButton from './ShareButton.vue';
-import LikeButton from './LikeButton.vue'
-import FaveButton from './FaveButton.vue';
+import ItemDialog from './Dialog/ItemDialog.vue';
 
 const props = defineProps({
   article: Object
@@ -11,14 +8,16 @@ const props = defineProps({
 
 const popup = ref(false)
 const isFav = ref(false)
-const imageUrl = process.env.API+'/uploads/images/'+props.article.imageUrl
+
+const imageUrl = process.env.API + '/uploads/images/' + props.article.imageUrl
+const imageUrl2 = process.env.API + '/uploads/images/' + props.article.imageUrl2
+const imageUrl3 = process.env.API + '/uploads/images/' + props.article.imageUrl3
 
 function handleClick() {
-  console.log('Handle click')
   popup.value = true
 }
 
-function handleFav(){
+function handleFav() {
   isFav.value = !isFav.value
 }
 
@@ -28,39 +27,62 @@ function handleFav(){
 <template>
 
   <div @click=handleClick>
-    <q-img :src="imageUrl" width="100%" height="auto" />
+    <div class="thumb-wrapper">
+
+      <q-img v-if=props.article.imageUrl2 class='thumb-image ' :src=imageUrl2 />
+      <q-img v-if=props.article.imageUrl3 class='thumb-image ' :src=imageUrl3 />
+      <q-img class="thumb-image " :src="imageUrl" />
+    </div>
   </div>
 
-  <q-dialog v-model="popup"  backdrop-filter="blur(4px) saturate(150%)"  >
-    <q-card  style="width: 450px">
-      <q-img :src="imageUrl"  width="450px" height="500px"  />
-      <div class="item-actions">
-        <div class="item-legend "> {{props.article.description}} </div>
-        <div class="full-width flex justify-around">
-          <MailButton :id="props.article.id" />
-          <ShareButton />
-          <LikeButton />
-          <FaveButton />
+  <ItemDialog v-model="popup"  :article=props.article />
 
-        </div>
-      </div>
-  </q-card>
-  </q-dialog>
+
 
 </template>
 
 <style scoped>
 
-.item-actions{
-  position: absolute;
-  bottom: 0%;
-  width:  100%;
-  background-color: rgba(0, 0, 0, 0.324);
+.thumb-wrapper {
+  padding: 6rem;
+  user-select: none;
+  align-items: center;
+  border: none;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all .3s ease;
+  position: relative;
 }
 
-.item-legend{
-  color: white;
-  font-weight: 600;
-  text-align: center;
+.thumb-wrapper:hover {
+  background: #0000000d;
+  cursor: pointer;
+  transition: all .3s ease
 }
+
+.thumb-image {
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px #0000000d;
+  height: auto;
+  width: 200px;
+  overflow: hidden;
+  position: absolute;
+}
+
+
+.thumb-image:nth-of-type(n){
+  transform: rotate(5deg);
+}
+.thumb-image:nth-of-type(2n){
+  transform: rotate(-5deg);
+}
+.thumb-image:nth-of-type(3n){
+  transform: rotate(10deg);
+}
+
+
 </style>

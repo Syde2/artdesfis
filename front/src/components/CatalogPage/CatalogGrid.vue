@@ -2,7 +2,6 @@
 import {onBeforeMount, ref } from 'vue'
 import {unsplash} from 'src/boot/unsplash.js'
 import CatalogItem from 'src/components/CatalogPage/CatalogItem.vue'
-import UnsplashItem from './UnsplashItem.vue';
 
 const props = defineProps({
   produits : Array
@@ -36,9 +35,10 @@ const props = defineProps({
   place-content: center;
   font-size: 2rem;
   font-weight: 600;
-  background-color: oklch(28% 0.02 270);
   border-radius: 4px;
   color: aliceblue;
   cursor: pointer;
 }
+
+
 </style>
