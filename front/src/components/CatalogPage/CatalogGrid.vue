@@ -8,29 +8,16 @@ const props = defineProps({
   produits : Array
 })
 
-const number = 40
-const photos = ref()
-
-onBeforeMount( async ()=>{
-  await unsplash.photos.getRandom(
-    {  count: number}
-  ).then( result =>{
-    photos.value = result.response
-  })
-})
-
 
 </script>
 <template>
 
-  <main class="grid">
+  <main class="grid q-pa-md">
     <div class="item"  v-for="each in produits" :key="each.id" >
       <CatalogItem :article="each" />
     </div>
 
-    <div class="item"  v-for="each in photos" :key="each.id" >
-      <UnsplashItem :article="each" />
-    </div>
+
   </main>
 
 

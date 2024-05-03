@@ -28,12 +28,12 @@ function handleFav(){
 <template>
 
   <div @click=handleClick>
-    <img :src="imageUrl" width="100%" height="auto" />
+    <q-img :src="imageUrl" width="100%" height="auto" />
   </div>
 
   <q-dialog v-model="popup"  backdrop-filter="blur(4px) saturate(150%)"  >
     <q-card  style="width: 450px">
-      <q-img :src="imageUrl" fit="contain"  />
+      <q-img :src="imageUrl"  width="450px" height="500px"  />
       <div class="item-actions">
         <div class="item-legend "> {{props.article.description}} </div>
         <div class="full-width flex justify-around">
