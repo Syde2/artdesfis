@@ -27,9 +27,15 @@ class Produits
     private ?string $imageUrl = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageUrl2 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageUrl3 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $collection = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2, nullable: true)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 9, scale: 2, nullable: true)]
     private ?string $prix = null;
 
     #[ORM\Column]
@@ -79,6 +85,32 @@ class Produits
         return $this;
     }
 
+    public function getImageUrl2(): ?string
+    {
+        return $this->imageUrl2;
+    }
+
+    public function setImageUrl2(?string $imageUrl2): static
+    {
+        $this->imageUrl2 = $imageUrl2;
+
+        return $this;
+    }
+
+    public function getImageUrl3(): ?string
+    {
+        return $this->imageUrl3;
+    }
+
+    public function setImageUrl3(?string $imageUrl3): static
+    {
+        $this->imageUrl3 = $imageUrl3;
+
+        return $this;
+    }
+
+
+
     public function getCollection(): ?string
     {
         return $this->collection;
@@ -126,9 +158,5 @@ class Produits
 
         return $this;
     }
-    #[ORM\PostUpdate]
-    public function setDemoPrice(): void
-    {
-        $this->setPrix('3333');
-    }
+
 }

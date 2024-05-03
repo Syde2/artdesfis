@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller\Admin;
-
 use App\Entity\Produits;
 use App\Repository\ProduitsRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -13,7 +12,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+
+#[IsGranted('ROLE_USER')]
 class DashboardController extends AbstractDashboardController
 {
     private ProduitsRepository $produitRepository;
@@ -26,9 +28,7 @@ class DashboardController extends AbstractDashboardController
 
     #[Route('/admin', name: 'admin')]
     public function index(): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        
+    {        
         $total = count( $this->produitRepository->findAll());
         $visible = count( $this->produitRepository->findBy(array('visible' => True)));
         $ruptureStock = count( $this->produitRepository->findBy(array('stock' => 0)));
@@ -59,5 +59,6 @@ class DashboardController extends AbstractDashboardController
     {
         return parent::configureActions()
             ->add(Crud::PAGE_INDEX, Action::DETAIL);
+
     }
 }

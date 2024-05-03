@@ -45,3 +45,7 @@ api/.thumbs.db
 *.ntvs*
 *.njsproj
 *.sln
+
+/api/public/uploads/*
+.DS_Store
+front/.DS_Store
