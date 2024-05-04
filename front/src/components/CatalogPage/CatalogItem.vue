@@ -28,7 +28,6 @@ function handleFav() {
 
   <div @click=handleClick>
     <div class="thumb-wrapper">
-
       <q-img v-if=props.article.imageUrl2 class='thumb-image ' :src=imageUrl2 />
       <q-img v-if=props.article.imageUrl3 class='thumb-image ' :src=imageUrl3 />
       <q-img class="thumb-image " :src="imageUrl" />
