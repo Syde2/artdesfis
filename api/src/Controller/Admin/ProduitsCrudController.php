@@ -45,6 +45,7 @@ class ProduitsCrudController extends AbstractCrudController
 
                 MoneyField::new('prix')
                 ->setColumns(2)
+                ->setStoredAsCents()
                 ->setCurrency('EUR'),
     
                 TextareaField::new('description')

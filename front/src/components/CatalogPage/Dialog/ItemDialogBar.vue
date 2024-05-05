@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="full-width  flex justify-evenly">
+  <div class="fit  flex  flex-center q-gutter-x-sm">
     <MailButton :id="props.id" />
     <ShareButton />
     <LikeButton />

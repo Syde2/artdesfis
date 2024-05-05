@@ -3,8 +3,23 @@
 
 :root{
   color: var($dark);
+}
+
+.grid {
+  place-items: center;
+  --min-column-width: min(250px, 100%);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--min-column-width), 1fr));
+  gap: 16px;
 
 }
+
+.grid-item {
+  cursor: pointer;
+  align-self: start;
+
+}
+
 .hero-title{
   font-size:16vw;
   font-family: "Playfair Display", serif;
@@ -44,3 +59,11 @@
   bottom: -10px;
 
 }
+
+.action-button{
+  width: 20%;
+  max-width: 200px;
+  height: 60%;
+
+}
+

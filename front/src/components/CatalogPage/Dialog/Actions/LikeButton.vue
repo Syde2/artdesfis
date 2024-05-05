@@ -12,7 +12,7 @@ function handleLiked(){
 
 <template>
 
-  <q-btn @click="handleLiked" flat :color="isLiked ? 'positive' : 'primary'" icon="thumb_up">
+  <q-btn @click="handleLiked"  :color="isLiked ? 'positive' : 'primary'" icon="thumb_up" class="action-button" unelevated  >
     <q-tooltip class="q-pa-md bg-grey-8" :delay="1000"> Liker </q-tooltip>
   </q-btn>
 </template>
