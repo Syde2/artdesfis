@@ -1,9 +1,11 @@
 <script setup>
-import IndexHeroTitle from 'src/components/IndexPage/IndexHeroTitle.vue'
+import CatalogButton from 'src/components/IndexPage/CatalogButton.vue';
+import AdminButton from 'src/components/IndexPage/AdminButton.vue';
 </script>
 <template>
-  <q-page class="flex flex-center">
-    <IndexHeroTitle />
+  <q-page class="flex column flex-center ">
+    <CatalogButton />
+    <AdminButton />
   </q-page>
 </template>
 
