@@ -1,18 +1,15 @@
 <script setup>
-import {onBeforeMount, ref } from 'vue'
-import {unsplash} from 'src/boot/unsplash.js'
 import CatalogItem from 'src/components/CatalogPage/CatalogItem.vue'
 
 const props = defineProps({
   produits : Array
 })
 
-
 </script>
 <template>
 
   <main class="grid q-pa-md">
-    <div class="item"  v-for="each in produits" :key="each.id" >
+    <div class="item"  v-for="each in produits" :key="each.nom" >
       <CatalogItem :article="each" />
     </div>
 

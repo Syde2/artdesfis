@@ -20,6 +20,7 @@ use App\Filter\CustomSearchFilter;
     normalizationContext: ['groups' => ['read:product']]
     )]
 #[ApiFilter(CustomSearchFilter::class)]
+#[ApiFilter(SearchFilter::class, properties: ['categorie.nom' => 'partial'])]
 
 class Produits
 {

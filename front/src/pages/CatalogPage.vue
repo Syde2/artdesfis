@@ -45,6 +45,23 @@ async function asyncSearch() {
   }
 }
 
+async function handleTabChange(filter) {
+  if (filter.startsWith('Tous')) {
+    return fetchProduits();
+  }
+  loading.value = true;
+  const filteredUrl = `produits?categorie.nom=${filter}`;
+  try {
+    const res = await api.get(filteredUrl);
+    produits.value = res.data['hydra:member'];
+  } catch (error) {
+    console.error('Erreur lors de la recherche:', error);
+  } finally {
+    loading.value = false;
+  }
+}
+
+
 const debouncedSearch = debounce(asyncSearch, 300);
 
 watch(searchFilter, (newValue) => {
@@ -60,7 +77,7 @@ watch(searchFilter, (newValue) => {
       <div class="row"> 
         <BackButton />
       </div>
-      <TabBar  />
+      <TabBar @tabChange="handleTabChange" />
       <SearchInput
         v-model="searchFilter" 
         @update:model-value="debouncedSearch" 

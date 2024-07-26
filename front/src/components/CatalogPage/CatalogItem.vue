@@ -32,6 +32,7 @@ function handleFav() {
       <q-img v-if=props.article.imageUrl3 class='thumb-image ' :src=imageUrl3 />
       <q-img class="thumb-image " :src="imageUrl" />
     </div>
+    <p class="text-caption text-dark ellipsis" >{{props.article.nom}}</p>
   </div>
 
   <ItemDialog v-model="popup"  :article=props.article />
