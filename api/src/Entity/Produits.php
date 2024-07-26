@@ -6,10 +6,17 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ProduitsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use App\Filter\CustomSearchFilter;
+
+
 
 #[ORM\Entity(repositoryClass: ProduitsRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[ApiResource(shortName :'Produit')]
+#[ApiFilter(CustomSearchFilter::class)]
+
 class Produits
 {
     #[ORM\Id]

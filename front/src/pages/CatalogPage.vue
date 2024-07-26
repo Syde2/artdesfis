@@ -2,44 +2,75 @@
 import { api } from 'src/boot/axios';
 import CatalogGrid from 'src/components/CatalogPage/CatalogGrid.vue';
 import BackButton from 'src/components/CatalogPage/BackButton.vue';
-import SearchInput from 'src/components/CatalogPage/SearchInput.vue'
-import { onBeforeMount, ref  } from 'vue';
+import SearchInput from 'src/components/CatalogPage/SearchInput.vue';
+import { onBeforeMount, ref, watch } from 'vue';
+import { debounce } from 'quasar';
 
-const produits = ref([])
-const searchFilter = ref()
-onBeforeMount(()=>{
-  fetchProduits()
+const produits = ref([]);
+const searchFilter = ref('');
+const loading = ref(false);
+
+onBeforeMount(() => {
+  fetchProduits();
+});
+
+async function fetchProduits() {
+  loading.value = true;
+  searchFilter.value = ''; // Réinitialise le filtre de recherche
+  try {
+    const res = await api.get('/produits');
+    produits.value = res.data['hydra:member'];
+  } catch (error) {
+    console.error('Erreur lors du chargement des produits:', error);
+  } finally {
+    loading.value = false;
+  }
 }
 
- )
-
-async function fetchProduits(){
-  const res =  await api.get('/produits')
-  produits.value = res.data['hydra:member']
-
+async function asyncSearch() {
+  if (searchFilter.value === '') {
+    return fetchProduits();
+  }
+  loading.value = true;
+  const searchTerm = encodeURIComponent(searchFilter.value);
+  const searchUrl = `produits?custom_search=${searchTerm}`;
+  try {
+    const res = await api.get(searchUrl);
+    produits.value = res.data['hydra:member'];
+  } catch (error) {
+    console.error('Erreur lors de la recherche:', error);
+  } finally {
+    loading.value = false;
+  }
 }
 
+const debouncedSearch = debounce(asyncSearch, 300);
 
-function handleSearchFilter(){
-  produits.value = produits.value.filter( produit=> produit.description.includes(searchFilter.value)  )
-}
-
-
+watch(searchFilter, (newValue) => {
+  if (newValue === '') {
+    fetchProduits();
+  }
+});
 </script>
+
 <template>
   <q-page class="">
     <q-toolbar>
       <BackButton />
       <h6 class="text-dark">Catalogue</h6>
       <q-space />
-      <SearchInput v-model="searchFilter" @search="handleSearchFilter" @clear="fetchProduits"  />
+      <SearchInput 
+        v-model="searchFilter" 
+        @update:model-value="debouncedSearch" 
+        @clear="fetchProduits" 
+      />
     </q-toolbar>
-    <q-separator inset  class="q-mb-md" />
+    <q-separator inset class="q-mb-md" />
 
+    <q-inner-loading :showing="loading">
+      <q-spinner-gears size="50px" color="primary" />
+    </q-inner-loading>
 
-    <CatalogGrid :produits />
-
+    <CatalogGrid :produits="produits" />
   </q-page>
 </template>
-
-
