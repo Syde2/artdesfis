@@ -51,6 +51,9 @@ class Produits
     #[ORM\Column]
     private ?int $stock = 1;
 
+    #[ORM\ManyToOne(inversedBy: 'produitsAssocies')]
+    private ?Categories $categorie = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -162,6 +165,18 @@ class Produits
     public function setStock(int $stock): static
     {
         $this->stock = $stock;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categories
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categories $categorie): static
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

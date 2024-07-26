@@ -1,8 +1,5 @@
 <script setup>
-import MailButton from 'src/components/CatalogPage/Dialog/Actions/MailButton.vue'
-import ShareButton from 'src/components/CatalogPage/Dialog/Actions/ShareButton.vue'
-import LikeButton from 'src/components/CatalogPage/Dialog/Actions/LikeButton.vue'
-import FaveButton from 'src/components/CatalogPage/Dialog/Actions/FaveButton.vue';
+import ContactButton  from 'src/components/CatalogPage/Dialog/Actions/ContactButton.vue'
 
 const props = defineProps({
   id:Number
@@ -11,10 +8,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="fit  flex  flex-center q-gutter-x-sm">
-    <MailButton :id="props.id" />
-    <ShareButton />
-    <LikeButton />
-    <FaveButton />
+  <div class="bg-accent q-pa-md  flex justify-center fit shadow-8" style="border-radius: 10px;">
+    <ContactButton :id="props.id" />
+
   </div>
-</template>
+</template> 

@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -33,9 +34,14 @@ class ProduitsCrudController extends AbstractCrudController
 
             FormField::addFieldset('Nouveau Produit')
             ->setIcon('cart-plus')->addCssClass('optional'),
-                TextField::new('nom')->setColumns(6),
-                NumberField::new('stock')->setColumns(2),
-         
+                TextField::new('nom')->setColumns(4),
+                AssociationField::new('categorie')
+                ->setColumns(2)
+                ->setFormTypeOption('placeholder', 'Choisissez une catégorie')
+                ->setFormTypeOption('choice_label', 'nom'),
+
+                NumberField::new('stock')->setColumns(1),
+
 
 
                 ImageField::new('imageUrl', 'Image')
@@ -47,6 +53,7 @@ class ProduitsCrudController extends AbstractCrudController
                 ->setColumns(2)
                 ->setStoredAsCents()
                 ->setCurrency('EUR'),
+
     
                 TextareaField::new('description')
                 ->setColumns(8)
