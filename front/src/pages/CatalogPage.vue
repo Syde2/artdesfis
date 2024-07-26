@@ -3,6 +3,7 @@ import { api } from 'src/boot/axios';
 import CatalogGrid from 'src/components/CatalogPage/CatalogGrid.vue';
 import BackButton from 'src/components/CatalogPage/BackButton.vue';
 import SearchInput from 'src/components/CatalogPage/SearchInput.vue';
+import TabBar from 'src/components/CatalogPage/TabBar.vue';
 import { onBeforeMount, ref, watch } from 'vue';
 import { debounce } from 'quasar';
 
@@ -54,21 +55,26 @@ watch(searchFilter, (newValue) => {
 </script>
 
 <template>
-  <q-page class="">
-    <q-toolbar>
-      <BackButton />
-      <h6 class="text-dark">Catalogue</h6>
-      <q-space />
-      <SearchInput 
+  <q-page>
+    <q-toolbar class=" q-mt-md row justify-around">
+      <div class="row"> 
+        <BackButton />
+      </div>
+      <TabBar  />
+      <SearchInput
         v-model="searchFilter" 
         @update:model-value="debouncedSearch" 
         @clear="fetchProduits" 
+        
       />
+
     </q-toolbar>
+
+    
     <q-separator inset class="q-mb-md" />
 
     <q-inner-loading :showing="loading">
-      <q-spinner-gears size="50px" color="primary" />
+      <q-spinner-infinity size="50px" color="primary" />
     </q-inner-loading>
 
     <CatalogGrid :produits="produits" />

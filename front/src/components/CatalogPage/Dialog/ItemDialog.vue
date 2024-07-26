@@ -9,17 +9,23 @@
           <q-img v-if="props.article.imageUrl3" :src="imageUrl3" fit="contain" class="grid-item" />
         </div>
       </q-card-section>
-      <q-card-section class="col-auto q-pa-md">
+      <q-card-section horizontal class="col-auto q-pa-md flex justify-around ">
+        
         <div class="row justify-between items-center">
+          
           <div class="col-grow">
-            <p class="text-h6 q-mb-xs">{{ props.article.nom }}</p>
+            <p class="text-h6 q-mb-xs">  
+              {{ props.article.nom }}</p>
             <p class="text-body2">{{ props.article.description }}</p>
-            <q-chip clickable outline :color=props.article.categorie.couleur  :label= props.article.categorie.nom  />
+          </div>
+          <div class="col-12 q-py-md">
+            <p class="text-h5"> Tarif :  {{ props.article.prix / 100 }}€</p>
+          </div>
 
-          </div>
-          <div class="col-auto">
-            <p class="text-h5">{{ props.article.prix / 100 }}€</p>
-          </div>
+        </div>
+        <!--  -->
+        <div class="">
+          <q-chip clickable outline :color=props.article.categorie.couleur  :label= props.article.categorie.nom  />
         </div>
       </q-card-section>
       <q-card-actions class="col-auto q-pa-md">
