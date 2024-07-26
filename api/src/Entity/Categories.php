@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\CategoriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -18,6 +19,7 @@ class Categories
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:product'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -28,6 +30,14 @@ class Categories
      */
     #[ORM\OneToMany(targetEntity: Produits::class, mappedBy: 'categorie')]
     private Collection $produitsAssocies;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read:product'])]
+    private ?string $couleur = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read:product'])]
+    private ?string $icone = null;
 
     public function __construct()
     {
@@ -89,6 +99,30 @@ class Categories
                 $produitsAssocy->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCouleur(): ?string
+    {
+        return $this->couleur;
+    }
+
+    public function setCouleur(?string $couleur): static
+    {
+        $this->couleur = $couleur;
+
+        return $this;
+    }
+
+    public function getIcone(): ?string
+    {
+        return $this->icone;
+    }
+
+    public function setIcone(?string $icone): static
+    {
+        $this->icone = $icone;
 
         return $this;
     }

@@ -14,6 +14,8 @@
           <div class="col-grow">
             <p class="text-h6 q-mb-xs">{{ props.article.nom }}</p>
             <p class="text-body2">{{ props.article.description }}</p>
+            <q-chip clickable outline :color=props.article.categorie.couleur  :label= props.article.categorie.nom  />
+
           </div>
           <div class="col-auto">
             <p class="text-h5">{{ props.article.prix / 100 }}€</p>

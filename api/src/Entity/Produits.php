@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ProduitsRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiFilter;
@@ -14,7 +15,10 @@ use App\Filter\CustomSearchFilter;
 
 #[ORM\Entity(repositoryClass: ProduitsRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[ApiResource(shortName :'Produit')]
+#[ApiResource(
+    shortName :'Produit',
+    normalizationContext: ['groups' => ['read:product']]
+    )]
 #[ApiFilter(CustomSearchFilter::class)]
 
 class Produits
@@ -25,33 +29,43 @@ class Produits
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:product'])]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['read:product'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read:product'])]
     private ?string $imageUrl = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read:product'])]
     private ?string $imageUrl2 = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read:product'])]
     private ?string $imageUrl3 = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read:product'])]
     private ?string $collection = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 9, scale: 2, nullable: true)]
+    #[Groups(['read:product'])]
     private ?string $prix = null;
 
     #[ORM\Column]
+    #[Groups(['read:product'])]
     private ?bool $visible = true;
 
     #[ORM\Column]
+    #[Groups(['read:product'])]
     private ?int $stock = 1;
 
     #[ORM\ManyToOne(inversedBy: 'produitsAssocies')]
+    #[Groups(['read:product'])]
     private ?Categories $categorie = null;
 
     public function getId(): ?int
