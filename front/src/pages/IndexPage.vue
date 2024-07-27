@@ -6,14 +6,15 @@ import AdminButton from 'src/components/IndexPage/AdminButton.vue';
 <template>
   <q-page>
     <div class="content-wrapper">
-      <header>
-        <h1 class="site-title">L'art des fils</h1>
+      <header class="bg-accent fit flex flex-center ">
+        <q-img src="/images/Logo1.webp"   height="auto"  width="20vw" />
+        <!-- <h1 class="site-title">L'art des fils</h1> -->
         <!-- <p class="site-subtitle">Découvrez l'élégance de la couture faite main</p> -->
       </header>
       <div class="image-gallery">
-        <q-img src="/images/img2.jpg" class="gallery-image" />
-        <q-img src="/images/img3.jpg" class="gallery-image" />
-        <q-img src="/images/img4.jpg" class="gallery-image" />
+        <q-img no-native-menu src="/images/img2.jpg" class="gallery-image" />
+        <q-img no-native-menu src="/images/img3.jpg" class="gallery-image" />
+        <q-img no-native-menu src="/images/img4.jpg" class="gallery-image" />
       </div>
       <div class=" flex column items-center">
         <CatalogButton class="custom-button" />

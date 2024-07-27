@@ -17,7 +17,7 @@ function handleTabClick(value){
      <q-tabs
         v-model="tab"
         indicator-color='accent'
-        class="text-dark"
+        class="text-accent"
         stretch
         narrow-indicator
         @update:model-value="handleTabClick"
