@@ -3,6 +3,7 @@ import { ref, onBeforeMount } from 'vue'
 import { api } from 'src/boot/axios';
 import { useRoute } from 'vue-router';
 import ContactForm from 'src/components/ContactPage/ContactForm.vue';
+import PageHeader from 'src/components/IndexPage/PageHeader.vue';
 
 const route = useRoute()
 const id = route.params.id
@@ -28,12 +29,11 @@ onBeforeMount(() => {
 
 <template>
   <q-page class="flex flex-center">
-    <div v-if="produit">
-      <h3> Je suis interessé par un Produit </h3>
-
+    <PageHeader style="height: 15vh;" />
+    <div v-if="produit" class="" style="height: 85vh;" >
+      <div class="text-h5 q-pt-md text-center text-accent">Je suis interessé par un Produit </div>
       <ContactForm :produit />
 
     </div>
-    <div v-else>Chargement en cours...</div>
   </q-page>
 </template>

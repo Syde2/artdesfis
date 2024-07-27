@@ -79,7 +79,8 @@ class ProduitsCrudController extends AbstractCrudController
             FormField::addFieldset('Autres')
             ->renderCollapsed()
             ->setIcon('circle-info')->addCssClass('optional'),
-            BooleanField::new('visible', "Visible sur le catalogue")->setColumns(6),
+            BooleanField::new('visible', "Visible sur le catalogue")->setColumns(10),
+            TextField::new('tag', "Tag")->setColumns(3)
 
 
 

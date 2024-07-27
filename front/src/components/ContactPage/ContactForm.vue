@@ -9,7 +9,6 @@ const props = defineProps({
 const $q = useQuasar()
 
 const email = ref(null)
-const departement = ref(null)
 const article = ref('')
 const reference = ref('')
 const commentaire = ref('')
@@ -33,57 +32,42 @@ function onSubmit() {
     }
     else {
         $q.notify({
-            color: 'green-4',
+            color: 'accent',
             textColor: 'white',
             icon: 'cloud_done',
-            message: 'Submitted'
+            message: 'Message Envoyé'
         })
     }
 }
 
 function onReset() {
     email.value = null
-    departement.value = null
     accept.value = false
-    commentaire.value = false
+    commentaire.value = null
 }
 </script>
 
 <template>
-
-        <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-
-            <div v-if="article" class="row justify-around">
-                <q-input class="col-8" filled type="text" v-model="article" label="Produit souhaité" readonly />
-                <q-input class="col-3" filled type="text" v-model="reference" label="Reference" readonly />
-            </div>
-
-            <div class="row justify-around">
-                <q-input class="col-8 " filled type="email" v-model="email" label="Adresse mail*"
-                    hint="*Adresse à laquelle je peux être recontactée" lazy-rules
-                    :rules="[val => val && val.length > 0 || 'Indiquez votre adresse mail']" />
-
-                <q-input class="col-3 q-ml-sm" filled type="number" v-model="departement" label="Département"
-                    lazy-rules :rules="[
-                        val => val !== null && val !== '' || 'Votre Numero de Département',
-                        val => val > 0 && val < 100 || '*Numero du département Francais sur 2 chiffres ou 99 pour l\'etranger'
-                     ]" />
-
-            </div>
-
-                <q-input class="col-12 q-mx-md " v-model="commentaire" filled type="textarea" label="Commentaire" />
-
-            <q-toggle v-model="accept"
-                label=" J'accepte que les informations saisies dans ce formulaire soient utilisées pour permettre de me recontacter" />
-
-            <div>
-                <q-btn label="Envoyer" type="submit" color="accent" />
-                <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-            </div>
-        </q-form>
- 
-
+<q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md q-pa-md">
     
+    <div v-if="article" class="row q-px-md" >
+        <q-input class="col-8" borderless type="text" v-model="article" label="Produit souhaité" readonly />
+        <q-input class="col-4" borderless type="text" v-model="reference" label="Reference" readonly />
+    </div>
+
+        <q-input  rounded outlined type="email" v-model="email" label="Adresse mail*"
+                hint="*Adresse à laquelle je peux être recontactée" lazy-rules
+                :rules="[val => val && val.length > 0 || 'Indiquez votre adresse mail']" />
 
 
+    <q-input class="" v-model="commentaire" rounded outlined type="textarea" label="Commentaire" />
+
+    <q-toggle v-model="accept" class="text-caption " color="accent"
+        label=" J'accepte que les informations saisies dans ce formulaire soient utilisées pour permettre de me recontacter" />
+
+    <div>
+        <q-btn label="Envoyer" type="submit" color="accent" />
+        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+    </div>
+</q-form>
 </template>

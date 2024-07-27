@@ -17,10 +17,13 @@ use App\Filter\CustomSearchFilter;
 #[ORM\HasLifecycleCallbacks]
 #[ApiResource(
     shortName :'Produit',
-    normalizationContext: ['groups' => ['read:product']]
+    normalizationContext: ['groups' => ['read:product']],
+    order: ['id' => 'DESC']
     )]
 #[ApiFilter(CustomSearchFilter::class)]
 #[ApiFilter(SearchFilter::class, properties: ['categorie.nom' => 'partial'])]
+#[ApiFilter(SearchFilter::class, properties: ['tag' => 'exact'])]
+
 
 class Produits
 {
@@ -68,6 +71,9 @@ class Produits
     #[ORM\ManyToOne(inversedBy: 'produitsAssocies')]
     #[Groups(['read:product'])]
     private ?Categories $categorie = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $tag = null;
 
     public function getId(): ?int
     {
@@ -192,6 +198,18 @@ class Produits
     public function setCategorie(?Categories $categorie): static
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getTag(): ?string
+    {
+        return $this->tag;
+    }
+
+    public function setTag(?string $tag): static
+    {
+        $this->tag = $tag;
 
         return $this;
     }
