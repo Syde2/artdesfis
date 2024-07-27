@@ -3,11 +3,10 @@ import {ref,} from 'vue'
 
 const emit = defineEmits(['tabChange'])
 
-const categories = [{nom:'Tous les Articles', icone:'apps'},{nom:'Zero Dechet', icone:'recycling'}, {nom:'Enfant', icone : 'stroller'}, {nom:'Article Mode', icone :'checkroom'}]
+const categories = [{nom:'Tous les Articles', icone:'apps'},{nom:'Zero Dechet', icone:'recycling'}, {nom:'Enfant', icone : 'stroller'}, {nom:'Accessoire Mode', icone :'checkroom'}]
 const tab = ref(categories[0].nom)
 
 function handleTabClick(value){
-    console.log('TABCLICK', value)
     emit('tabChange', value)
 }
 
