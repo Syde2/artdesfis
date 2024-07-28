@@ -27,3 +27,6 @@ services:
             - { name: 'doctrine.event_listener', event: 'postPersist' }
         arguments:
             $toEmail: 'contact@artdesfils.fr'
+            $mailer: '@mailer'
+            $texter: '@texter'
+            $toPhone: '%env(ADMIN_PHONE)%'
