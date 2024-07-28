@@ -1,6 +1,7 @@
 <script setup>
 import { useQuasar } from 'quasar'
 import { ref, watch } from 'vue'
+import { api } from 'src/boot/axios';
 
 const props = defineProps({
     produit: Object
@@ -31,6 +32,7 @@ function onSubmit() {
         })
     }
     else {
+        PostForm()
         $q.notify({
             color: 'accent',
             textColor: 'white',
@@ -38,6 +40,22 @@ function onSubmit() {
             message: 'Message Envoyé'
         })
     }
+}
+
+
+function PostForm(){
+    const url = ('/contacts')
+    const payload = {
+        "email": email.value,
+        "message": commentaire.value,
+    }
+    if(article.value){
+        payload.nomArticle = article.value
+    }
+    if(reference.value){
+        payload.referenceArticle = reference.value
+    }
+    api.post(url, payload)
 }
 
 function onReset() {
