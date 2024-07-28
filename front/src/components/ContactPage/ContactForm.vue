@@ -33,17 +33,11 @@ function onSubmit() {
     }
     else {
         PostForm()
-        $q.notify({
-            color: 'accent',
-            textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Message Envoyé'
-        })
     }
 }
 
 
-function PostForm(){
+async function PostForm(){
     const url = ('/contacts')
     const payload = {
         "email": email.value,
@@ -55,7 +49,26 @@ function PostForm(){
     if(reference.value){
         payload.referenceArticle = reference.value
     }
-    api.post(url, payload)
+    try {
+        const response = await api.post(url, payload);
+        $q.notify({
+            color: 'positive',
+            message: 'Formulaire envoyé avec succès!',
+            icon: 'check'
+        });
+        return response.data;
+    }
+
+    catch (error){
+        console.error('Erreur lors de l\'envoi du formulaire:', error);
+        $q.notify({
+            color: 'negative',
+            message: 'Erreur lors de l\'envoi du formulaire. Veuillez réessayer.',
+            icon: 'error'
+      });
+      throw error;
+    }
+
 }
 
 function onReset() {
