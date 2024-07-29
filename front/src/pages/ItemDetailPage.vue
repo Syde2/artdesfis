@@ -2,46 +2,29 @@
 import { ref, computed } from 'vue'
 import ItemDialogBar from '../components/ItemDetail/ItemDialogBar.vue'
 import CloseButton from '../components/ItemDetail/CloseButton.vue'
+import ItemGallery from '../components/ItemDetail/ItemGallery.vue.vue'
 
 const props = defineProps({
   article: Object
 })
 const popup = defineModel()
-const zoomedImg = ref()
-const zoomModel = ref(false)
-const imageUrl = computed(() => process.env.API + '/uploads/images/' + props.article.imageUrl)
-const imageUrl2 = computed(() => props.article.imageUrl2 ? process.env.API + '/uploads/images/' + props.article.imageUrl2 : null)
-const imageUrl3 = computed(() => props.article.imageUrl3 ? process.env.API + '/uploads/images/' + props.article.imageUrl3 : null)
 
-const imageCount = computed(() => {
-  return [imageUrl.value, imageUrl2.value, imageUrl3.value].filter(Boolean).length
-})
+// const imageUrl = computed(() => process.env.API + '/uploads/images/' + props.article.imageUrl)
+// const imageUrl2 = computed(() => props.article.imageUrl2 ? process.env.API + '/uploads/images/' + props.article.imageUrl2 : null)
+// const imageUrl3 = computed(() => props.article.imageUrl3 ? process.env.API + '/uploads/images/' + props.article.imageUrl3 : null)
 
-function toggleZoom(e) {
-  if (e.target.tagName === 'IMG') {
-    zoomedImg.value = e.target.src
-    zoomModel.value = true
-  }
-}
+// const imageCount = computed(() => {
+//   return [imageUrl.value, imageUrl2.value, imageUrl3.value].filter(Boolean).length
+// })
+
+
 </script>
 
 <template>
   <q-dialog full-width v-model="popup" backdrop-filter="blur(4px) saturate(150%)">
     <q-card class="column q-pa-sm" style="height: 100vh; overflow: hidden; position: relative;">
       <CloseButton v-model="popup" class="col-auto q-pa-sm" />
-      <q-card-section class="col-grow "  @click="toggleZoom">
-        <div :class="['image-grid', `grid-${imageCount}`]">
-          <q-img :src="imageUrl" fit="cover" class="grid-item" >
-            <q-tooltip :delay="500" class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
-          </q-img>
-          <q-img v-if="props.article.imageUrl2" :src="imageUrl2" fit="contain" class="grid-item">
-            <q-tooltip :delay="500"  class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
-            </q-img>
-          <q-img v-if="props.article.imageUrl3" :src="imageUrl3" fit="contain" class="grid-item" >
-            <q-tooltip :delay="500"  class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
-            </q-img>
-        </div>
-      </q-card-section>
+      <ItemGallery  :article />
       <q-card-section horizontal class="col-auto q-pa-md flex justify-between ">
         
         <div class="row justify-around  items-center">     
@@ -71,28 +54,3 @@ function toggleZoom(e) {
   </q-dialog>
 </template>
 
-<style scoped>
-.image-grid {
-  display: grid;
-  gap: 1rem;
-  height: 100%;
-}
-
-.grid-1 {
-  grid-template-columns: 1fr;
-}
-
-.grid-2 {
-  grid-template-columns: 1fr 1fr;
-}
-
-.grid-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.grid-item {
-  cursor: pointer;
-  height: 100%;
-  object-fit: contain;
-}
-</style>
