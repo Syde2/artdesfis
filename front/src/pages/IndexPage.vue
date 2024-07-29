@@ -4,6 +4,7 @@ import AdminButton from 'src/components/IndexPage/AdminButton.vue';
 import PageHeader from 'src/components/IndexPage/PageHeader.vue';
 import { useQuasar } from 'quasar'
 import IndexGallery from 'src/components/IndexPage/IndexGallery.vue'
+import IndexCarousel from 'src/components/IndexPage/IndexCarousel.vue';
 
 const $q = useQuasar()
 const mobile =   $q.platform.is.mobile
@@ -14,7 +15,10 @@ const mobile =   $q.platform.is.mobile
   <q-page>
     <div class="content-wrapper">
       <PageHeader :width="mobile? 200:350" />
-      <IndexGallery />
+      
+      <IndexCarousel v-if="mobile" />
+      <IndexGallery v-else/>
+
       <div class=" flex column items-center">
         <CatalogButton class="custom-button" />
         <AdminButton class="custom-button" />
