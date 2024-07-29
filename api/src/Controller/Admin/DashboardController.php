@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 use App\Entity\Produits;
 use App\Entity\Contact;
 use App\Repository\ProduitsRepository;
+use App\Controller\Admin\ProduitsCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -16,14 +17,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
+
 #[IsGranted('ROLE_USER')]
 class DashboardController extends AbstractDashboardController
 {
     private ProduitsRepository $produitRepository;
+    private AdminUrlGenerator $adminUrlGenerator;
 
-    public function __construct(ProduitsRepository $produitsRepository)
+
+    public function __construct(ProduitsRepository $produitsRepository, AdminUrlGenerator $adminUrlGenerator)
     {
         $this->produitRepository = $produitsRepository;
+        $this->adminUrlGenerator = $adminUrlGenerator;
+
 
     }
 
@@ -31,14 +37,16 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {        
         $total = count( $this->produitRepository->findAll());
-        $visible = count( $this->produitRepository->findBy(array('visible' => True)));
-        $ruptureStock = count( $this->produitRepository->findBy(array('stock' => 0)));
+
+        $newProductUrl = $this->adminUrlGenerator
+        ->setController(ProduitsCrudController::class)
+        ->setAction(Action::NEW)
+        ->generateUrl();
 
 
         return $this->render('dashboard/index.html.twig', [
             'totalArticles' => $total,
-            'totalVisible' => $visible,
-            'totalRuptureStock' => $ruptureStock,
+            'newProductUrl' => $newProductUrl,
 
         ]);
     }

@@ -1,22 +1,16 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block page_title %}
-  Tableau de Bord des Articles
-{% endblock %}
-
-{% block main %}
+{% block page_content %}
     <div class="row">
-        <div class="col-6">
-        <ul>
-            <li> Nombre d'Articles enregistrés : {{totalArticles}} </li>
-            <li> Nombre d'Articles visibles : {{totalVisible}} </li>
-            <li> Nombre d'Articles en Rupture de Stock : {{totalRuptureStock}} </li>
-        </ul>
-      
+        <h5 class="card-title">Nombre de Produits référencés :  {{ totalArticles }}</h5>
+    </div>
 
-        </div>
-        <div class="col-6">
-  
+    {# Nouveau bouton pour créer un produit #}
+    <div class="row mt-4">
+        <div class="col-12">
+            <a href="{{ newProductUrl }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Ajouter un produit
+            </a>
         </div>
     </div>
 {% endblock %}
