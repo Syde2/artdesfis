@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 use App\Entity\Produits;
+use App\Entity\Contact;
 use App\Repository\ProduitsRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -53,6 +54,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Tableau de Bord', 'fa fa-dashboard');
 
         yield MenuItem::linkToCrud('Produits', 'fas fa-list', Produits::class);
+        yield MenuItem::linkToCrud('Contacts', 'fas fa-list', Contact::class);
     }
 
     public function configureActions(): Actions
