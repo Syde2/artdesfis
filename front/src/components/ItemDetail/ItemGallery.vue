@@ -53,7 +53,7 @@ const imageCount = computed(() => {
 .image-grid {
   display: grid;
   gap: 1rem;
-  height: 100%;
+  height: 30vh;
 }
 
 .grid-1 {

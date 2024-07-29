@@ -19,12 +19,12 @@ const imageUrl3 = computed(() => props.article.imageUrl3 ? process.env.API + '/u
     <div class="q-pb-md full-width">
       <q-carousel
         animated
+        thumbnails
+        swipeable
         v-model="slide"
-        :arrows="imageUrl2 ? true:false"
         infinite
         :autoplay="imageUrl2 ? true:false"
-        style="max-height: 33vh;"
-
+        style="max-height: 40vh;"
       >
         <q-carousel-slide :name="1" :img-src= imageUrl />
         <q-carousel-slide :name="2" :img-src= imageUrl2 />
