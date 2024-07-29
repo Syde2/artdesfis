@@ -2,12 +2,17 @@
 import CatalogButton from 'src/components/IndexPage/CatalogButton.vue';
 import AdminButton from 'src/components/IndexPage/AdminButton.vue';
 import PageHeader from 'src/components/IndexPage/PageHeader.vue';
+import { useQuasar } from 'quasar'
+
+const $q = useQuasar()
+const mobile =   $q.platform.is.mobile
+
 </script>
 
 <template>
   <q-page>
     <div class="content-wrapper">
-      <PageHeader />
+      <PageHeader :width="mobile? 200:350" />
       <div class="image-gallery">
         <q-img no-native-menu src="/images/img2.jpg" class="gallery-image" />
         <q-img no-native-menu src="/images/img3.jpg" class="gallery-image " />
@@ -23,10 +28,10 @@ import PageHeader from 'src/components/IndexPage/PageHeader.vue';
 
 <style scoped>
 .content-wrapper {
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: justify-evenly;
   align-items: center;
 }
 

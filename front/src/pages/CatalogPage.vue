@@ -6,6 +6,7 @@ import SearchInput from 'src/components/CatalogPage/SearchInput.vue';
 import TabBar from 'src/components/CatalogPage/TabBar.vue';
 import { onBeforeMount, ref, watch } from 'vue';
 import { debounce } from 'quasar';
+import PageHeader from 'src/components/IndexPage/PageHeader.vue';
 
 const produits = ref([]);
 const searchFilter = ref('');
@@ -73,6 +74,7 @@ watch(searchFilter, (newValue) => {
 
 <template>
   <q-page>
+    <PageHeader width="150" />
     <q-toolbar class=" q-mt-md row justify-around">
       <div class="row"> 
         <BackButton />
