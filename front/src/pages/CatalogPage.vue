@@ -1,7 +1,6 @@
 <script setup>
 import { api } from 'src/boot/axios';
 import CatalogGrid from 'src/components/CatalogPage/CatalogGrid.vue';
-import BackButton from 'src/components/CatalogPage/BackButton.vue';
 import SearchInput from 'src/components/CatalogPage/SearchInput.vue';
 import TabBar from 'src/components/CatalogPage/TabBar.vue';
 import { onBeforeMount, ref, watch } from 'vue';
@@ -75,17 +74,15 @@ watch(searchFilter, (newValue) => {
 <template>
   <q-page>
     <PageHeader width="150" />
-    <q-toolbar class=" q-mt-md row justify-around">
-      <div class="row"> 
-        <BackButton />
-      </div>
+    <q-toolbar class=" q-mt-md row justify-center">
+
       <TabBar @tabChange="handleTabChange" />
-      <SearchInput
+      <!-- <SearchInput
         v-model="searchFilter" 
         @update:model-value="debouncedSearch" 
         @clear="fetchProduits" 
         
-      />
+      /> -->
 
     </q-toolbar>
 

@@ -29,7 +29,7 @@ onBeforeMount(() => {
 
 <template>
   <q-page class="flex flex-center">
-    <PageHeader style="height: 15vh;" />
+    <PageHeader width="200" />
     <div v-if="produit" class="" style="height: 85vh;" >
       <div class="text-h5 q-pt-md text-center text-accent">Je suis interessé par un Produit </div>
       <ContactForm :produit />
