@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import ItemDialog from './Dialog/ItemDialog.vue';
+import ItemDetailPage from 'src/pages/ItemDetailPage.vue';
 
 const props = defineProps({
   article: Object
@@ -17,11 +17,6 @@ function handleClick() {
   popup.value = true
 }
 
-function handleFav() {
-  isFav.value = !isFav.value
-}
-
-
 </script>
 
 <template>
@@ -35,7 +30,7 @@ function handleFav() {
     <p class="  text-center text-caption text-dark ellipsis" >{{props.article.nom}}</p>
   </div> 
 
-  <ItemDialog v-model="popup"  :article=props.article />
+  <ItemDetailPage  v-model="popup"  :article=props.article />
 
 
 

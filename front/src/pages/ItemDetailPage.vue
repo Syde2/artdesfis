@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
-import ItemDialogBar from './ItemDialogBar.vue';
-import CloseButton from './CloseButton.vue'
+import ItemDialogBar from '../components/ItemDetail/ItemDialogBar.vue'
+import CloseButton from '../components/ItemDetail/CloseButton.vue'
 
 const props = defineProps({
   article: Object

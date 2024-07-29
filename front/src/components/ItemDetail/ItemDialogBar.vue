@@ -1,6 +1,6 @@
 <script setup>
-import ContactButton  from 'src/components/CatalogPage/Dialog/Actions/ContactButton.vue'
-import ContactVariante from './Actions/ContactVariante.vue';
+import ContactButton  from  '../ItemDetail/ContactButton.vue'
+import ContactVariante from '../ItemDetail/ContactVariante.vue'
 
 const props = defineProps({
   id:String
