@@ -1,15 +1,16 @@
 <script setup>
-import { ref, computed } from 'vue'
 import ItemDialogBar from '../components/ItemDetail/ItemDialogBar.vue'
 import CloseButton from '../components/ItemDetail/CloseButton.vue'
 import ItemGallery from '../components/ItemDetail/ItemGallery.vue'
 import ItemCarousel from 'src/components/ItemDetail/ItemCarousel.vue'
+import { useQuasar } from 'quasar'
 
 const props = defineProps({
   article: Object
 })
 const popup = defineModel()
-
+const $q = useQuasar()
+const mobile =   $q.platform.is.mobile
 
 </script>
 
@@ -17,10 +18,8 @@ const popup = defineModel()
   <q-dialog full-width v-model="popup" backdrop-filter="blur(4px) saturate(150%)">
     <q-card class="column q-pa-sm" style="height: 100vh; overflow: hidden; position: relative;">
       <CloseButton v-model="popup" class="col-auto q-pa-sm" />
-
-      <ItemGallery class="gt-sm" :article  />
-      <ItemCarousel class="lt-md" :article />
-
+      <ItemCarousel v-if="mobile" :article />
+      <ItemGallery v-else class="gt-sm" :article  />
 
       <q-card-section horizontal class="col-auto q-pa-md flex justify-between ">
         
@@ -40,14 +39,6 @@ const popup = defineModel()
         <ItemDialogBar :id="props.article['@id']" />
       </q-card-actions>
     </q-card>
-  </q-dialog>
-
-  <q-dialog full-width full-height v-model="zoomModel">
-    <div @click="zoomModel = false">
-      <q-img :src="zoomedImg">
-        <CloseButton v-model="zoomModel" />
-      </q-img>
-    </div>
   </q-dialog>
 </template>
 

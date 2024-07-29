@@ -1,4 +1,4 @@
-<script setup >
+<script setup>
 import { ref, computed } from 'vue'
 
 
@@ -27,19 +27,26 @@ const imageCount = computed(() => {
 </script>
 
 <template>
-	<q-card-section class="col-grow "  @click="toggleZoom">
-	        <div :class="['image-grid', `grid-${imageCount}`]" >
-	          <q-img :src="imageUrl" fit="cover" class="grid-item" >
-	            <q-tooltip :delay="500" class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
-	          </q-img>
-	          <q-img v-if="props.article.imageUrl2" :src="imageUrl2" fit="contain" class="grid-item">
-	            <q-tooltip :delay="500"  class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
-	            </q-img>
-	          <q-img v-if="props.article.imageUrl3" :src="imageUrl3" fit="contain" class="grid-item" >
-	            <q-tooltip :delay="500"  class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
-	            </q-img>
-	        </div>
-	      </q-card-section>
+  <q-card-section class="col-grow " @click="toggleZoom">
+    <div :class="['image-grid', `grid-${imageCount}`]">
+      <q-img :src="imageUrl" fit="cover" class="grid-item">
+        <q-tooltip :delay="500" class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
+      </q-img>
+      <q-img v-if="props.article.imageUrl2" :src="imageUrl2" fit="contain" class="grid-item">
+        <q-tooltip :delay="500" class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
+      </q-img>
+      <q-img v-if="props.article.imageUrl3" :src="imageUrl3" fit="contain" class="grid-item">
+        <q-tooltip :delay="500" class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
+      </q-img>
+    </div>
+  </q-card-section>
+
+  <q-dialog full-width full-height v-model="zoomModel">
+    <div @click="zoomModel = false">
+      <q-img :src="zoomedImg">
+      </q-img>
+    </div>
+  </q-dialog>
 </template>
 
 <style scoped>

@@ -7,7 +7,6 @@ const props = defineProps({
 })
 
 const popup = ref(false)
-const isFav = ref(false)
 
 const imageUrl = process.env.API + '/uploads/images/' + props.article.imageUrl
 const imageUrl2 = process.env.API + '/uploads/images/' + props.article.imageUrl2

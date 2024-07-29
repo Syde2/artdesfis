@@ -73,7 +73,7 @@ watch(searchFilter, (newValue) => {
 
 <template>
   <q-page>
-    <PageHeader width="150" />
+    <PageHeader :width=150 />
     <q-toolbar class=" q-mt-md row justify-center">
 
       <TabBar @tabChange="handleTabChange" />
