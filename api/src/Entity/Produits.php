@@ -21,9 +21,8 @@ use App\Filter\CustomSearchFilter;
     order: ['id' => 'DESC']
     )]
 #[ApiFilter(CustomSearchFilter::class)]
-#[ApiFilter(SearchFilter::class, properties: ['categorie.nom' => 'partial'])]
-#[ApiFilter(SearchFilter::class, properties: ['tag' => 'exact'])]
-
+#[ApiFilter(SearchFilter::class, properties: ['categorie.nom' => 'partial', 'tag' => 'exact' ])]
+// #[ApiFilter(SearchFilter::class, properties: ['tag' => 'exact'])]
 
 class Produits
 {

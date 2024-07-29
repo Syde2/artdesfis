@@ -10,8 +10,8 @@ import PageHeader from 'src/components/IndexPage/PageHeader.vue';
       <PageHeader />
       <div class="image-gallery">
         <q-img no-native-menu src="/images/img2.jpg" class="gallery-image" />
-        <q-img no-native-menu src="/images/img3.jpg" class="gallery-image" />
-        <q-img no-native-menu src="/images/img4.jpg" class="gallery-image" />
+        <q-img no-native-menu src="/images/img3.jpg" class="gallery-image " />
+        <q-img no-native-menu src="/images/img4.jpg" class="gallery-image " />
       </div>
       <div class=" flex column items-center">
         <CatalogButton class="custom-button" />
@@ -47,7 +47,7 @@ import PageHeader from 'src/components/IndexPage/PageHeader.vue';
 .image-gallery {
   display: flex;
   justify-content: space-between;
-  min-width: 900px;
+  width: 80vw;
   margin-bottom: 2rem;
   background: rgba(252, 252, 252, 0.9);
   padding: 2rem;
