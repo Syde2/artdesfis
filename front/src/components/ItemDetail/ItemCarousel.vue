@@ -1,7 +1,15 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+
+const props = defineProps({
+  article: Object
+})
 
 const slide = ref(1)
+const imageUrl = computed(() => process.env.API + '/uploads/images/' + props.article.imageUrl)
+const imageUrl2 = computed(() => props.article.imageUrl2 ? process.env.API + '/uploads/images/' + props.article.imageUrl2 : null)
+const imageUrl3 = computed(() => props.article.imageUrl3 ? process.env.API + '/uploads/images/' + props.article.imageUrl3 : null)
+
 
 </script>
 
@@ -11,14 +19,15 @@ const slide = ref(1)
       <q-carousel
         animated
         v-model="slide"
-        arrows
+        :arrows="imageUrl2 ? true:false"
         infinite
-        :autoplay=true
+        :autoplay="imageUrl2 ? true:false"
+        style="max-height: 33vh;"
 
       >
-        <q-carousel-slide :name="1" img-src="/images/img2.jpg" />
-        <q-carousel-slide :name="2" img-src="/images/img3.jpg"/>
-        <q-carousel-slide :name="3" img-src="/images/img4.jpg" />
+        <q-carousel-slide :name="1" :img-src= imageUrl />
+        <q-carousel-slide :name="2" :img-src= imageUrl2 />
+        <q-carousel-slide :name="3" :img-src= imageUrl3 />
       </q-carousel>
     </div>
   </template>
