@@ -15,6 +15,7 @@ const imageUrl3 = computed(() => props.article.imageUrl3 ? process.env.API + '/u
 
 
 <template>
+  <q-card-section>
     <div class="q-pb-md full-width">
       <q-carousel
         animated
@@ -30,5 +31,6 @@ const imageUrl3 = computed(() => props.article.imageUrl3 ? process.env.API + '/u
         <q-carousel-slide :name="3" :img-src= imageUrl3 />
       </q-carousel>
     </div>
+  </q-card-section>
   </template>
   
