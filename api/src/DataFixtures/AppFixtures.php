@@ -48,9 +48,10 @@ class AppFixtures extends Fixture
 
         $csvFile = $this->publicDir. '/catalog_products.csv';
         $csvData = array_map('str_getcsv', file($csvFile));
-        
         $headers = array_shift($csvData);
-        
+        // Inverse l'ordre pour avoir l'article le + recent à la fin 
+        $csvData = array_reverse($csvData);
+
         foreach ($csvData as $row) {
             $data = array_combine($headers, $row);
             
