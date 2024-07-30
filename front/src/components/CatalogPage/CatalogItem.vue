@@ -62,6 +62,7 @@ function handleClick() {
   border-radius: 1rem;
   box-shadow: 0 2px 4px #0000000d;
   height: auto;
+  max-height: 190px;
   width: 200px;
   overflow: hidden;
   position: absolute;
