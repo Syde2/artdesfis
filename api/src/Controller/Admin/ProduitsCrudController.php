@@ -17,6 +17,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+
 
 
 
@@ -26,6 +28,12 @@ class ProduitsCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Produits::class;
+    }
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+        ->setPaginatorPageSize(25)
+        ->setDefaultSort(['id' => 'DESC']);
     }
     
     public function configureFields(string $pageName): iterable
@@ -97,5 +105,8 @@ class ProduitsCrudController extends AbstractCrudController
             ->add(BooleanFilter::new('stock'))
         ;
     }
+
+
+
     
 }
