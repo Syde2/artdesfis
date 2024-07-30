@@ -57,7 +57,7 @@ module.exports = configure(function (ctx) {
       env: {
         API: ctx.dev
         ? 'https://localhost:8000'
-        : 'https://demo.artdesfils.fr/api/public'
+        : 'https://artdesfils.fr/api/public'
       },
       // rawDefine: {}
       // ignorePublicFolder: true,
