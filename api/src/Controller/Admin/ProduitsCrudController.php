@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -18,6 +19,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+
 
 
 
@@ -33,7 +37,19 @@ class ProduitsCrudController extends AbstractCrudController
     {
         return $crud
         ->setPaginatorPageSize(25)
-        ->setDefaultSort(['id' => 'DESC']);
+        ->setDefaultSort(['id' => 'DESC'])
+        ->showEntityActionsInlined();
+    }
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
+                return $action
+                    ->setLabel('Modifier')
+                    ->setIcon('fa fa-edit')
+                    ->addCssClass('btn btn-primary');
+            })
+            ->reorder(Crud::PAGE_INDEX, [Action::EDIT, Action::DELETE]);
     }
     
     public function configureFields(string $pageName): iterable
@@ -43,10 +59,15 @@ class ProduitsCrudController extends AbstractCrudController
             FormField::addFieldset('Nouveau Produit')
             ->setIcon('cart-plus')->addCssClass('optional'),
                 TextField::new('nom')->setColumns(4),
+
                 AssociationField::new('categorie')
                 ->setColumns(2)
                 ->setFormTypeOption('placeholder', 'Choisissez une catégorie')
                 ->setFormTypeOption('choice_label', 'nom'),
+
+
+
+
 
                 NumberField::new('stock')->setColumns(1),
 
@@ -87,8 +108,8 @@ class ProduitsCrudController extends AbstractCrudController
             FormField::addFieldset('Autres')
             ->renderCollapsed()
             ->setIcon('circle-info')->addCssClass('optional'),
-            BooleanField::new('visible', "Visible sur le catalogue")->setColumns(10),
-            TextField::new('tag', "Tag")->setColumns(3)
+            BooleanField::new('visible', "Visible sur le catalogue")->setColumns(10)->hideOnIndex(),
+            TextField::new('tag', "Tag")->setColumns(3)->hideOnIndex()
 
 
 
@@ -99,6 +120,7 @@ class ProduitsCrudController extends AbstractCrudController
         
         ];
     }
+
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
