@@ -2,7 +2,7 @@ api_platform:
     title: Art Des Fils
     version: 1.0.0
     mapping:
-        paths: ['%kernel.project_dir%/src/Entity']  # Ajoutez cette ligne
+        paths: ['%kernel.project_dir%/src/Entity']
     formats:
         jsonld: ['application/ld+json']
         json: ['application/json']

@@ -49,3 +49,4 @@ api/.thumbs.db
 /api/public/uploads/*
 .DS_Store
 front/.DS_Store
+api/public/catalog_products.csv
