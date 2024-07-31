@@ -6,46 +6,30 @@ use App\Entity\Categories;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\Produits;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use App\DataFixtures\CategoriesFixtures;
 
 
-class AppFixtures extends Fixture
+
+class ProduitsFixtures extends Fixture implements DependentFixtureInterface
 {
-    private $userPasswordHasherInterface;
     private string $publicDir;
 
-    public function __construct (UserPasswordHasherInterface $userPasswordHasherInterface, $publicDir) 
+    public function __construct ($publicDir) 
     {
         $this->publicDir = $publicDir;
-        $this->userPasswordHasherInterface = $userPasswordHasherInterface;
+    }
+
+    public function getDependencies()
+    {
+        return [
+            CategoriesFixtures::class,
+        ];
     }
 
     public function load(ObjectManager $manager): void
     {
-        //  $ZeroDechet = new Categories();
-        //  $ZeroDechet->setNom('Zero Dechet');
-        //  $ZeroDechet->setCouleur('green');
-        //  $manager->persist($ZeroDechet);
-
-        //  $Enfant = new Categories();
-        //  $Enfant->setNom('Enfant');
-        //  $Enfant->setCouleur('blue');
-        //  $manager->persist($Enfant);
-
-        //  $AccessoireMode = new Categories();
-        //  $AccessoireMode->setNom('Accessoire Mode');
-        //  $AccessoireMode->setCouleur('violet');
-        //  $manager->persist($AccessoireMode);
-
-        //  $Utilisateur = new User();
-        //  $Utilisateur->setUsername('agicq');
-        //  $Utilisateur->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
-        //  $Utilisateur->setPassword( $this->userPasswordHasherInterface->hashPassword(
-        //         $Utilisateur, ''
-        //     ));
-        // $manager->persist($Utilisateur);
-
         $csvFile = $this->publicDir. '/catalog_products.csv';
         $csvData = array_map('str_getcsv', file($csvFile));
         $headers = array_shift($csvData);
@@ -98,4 +82,6 @@ class AppFixtures extends Fixture
 
         $manager->flush(); 
     }
+
+
 }

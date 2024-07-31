@@ -50,3 +50,4 @@ api/.thumbs.db
 .DS_Store
 front/.DS_Store
 api/public/catalog_products.csv
+api/src/DataFixtures/UserFixtures.php
