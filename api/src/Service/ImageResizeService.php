@@ -35,7 +35,7 @@ class ImageResizeService
             $image = $this->manager->read($imagePath);
             $originalSize = $image->width() . 'x' . $image->height();
             $halfWidth = $image->width() / 2;
-            $halfHeight = $image-height() / 2;
+            $halfHeight = $image->height() / 2;
 
             if($image->width() <= $this->minWidth || $image->height() <= $this->minHeight){
                 $this->logger->info("L'image ne nécessite pas de redimensionnement: {$imagePath}");
