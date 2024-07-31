@@ -29,7 +29,7 @@ const imageCount = computed(() => {
 <template>
   <q-card-section class="col-grow " @click="toggleZoom">
     <div :class="['image-grid', `grid-${imageCount}`]">
-      <q-img :src="imageUrl" fit="cover" class="grid-item">
+      <q-img :src="imageUrl" fit="contain" class="grid-item">
         <q-tooltip :delay="500" class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
       </q-img>
       <q-img v-if="props.article.imageUrl2" :src="imageUrl2" fit="contain" class="grid-item">
