@@ -73,10 +73,10 @@ const imageCount = computed(() => {
 }
 
 .grid-3 {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
 }
 .grid-4 {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
 }
 .grid-5 {
   grid-template-columns: repeat(5, 1fr);
