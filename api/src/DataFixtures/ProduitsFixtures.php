@@ -42,7 +42,7 @@ class ProduitsFixtures extends Fixture implements DependentFixtureInterface
             $produit = new Produits();
             $produit->setNom($data['name']);
             $description =  strip_tags(  $data['description']);
-            $description = str_replace('&nbsp;', ' ', $description);
+            $description = str_replace('&nbsp;', '. ', $description);
             $produit->setDescription($description );
             
             // Gestion des URLs d'images

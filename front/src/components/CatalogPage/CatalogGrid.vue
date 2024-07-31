@@ -9,7 +9,7 @@ const props = defineProps({
 <template>
 
   <main class="grid q-pa-md">
-    <div class="item"  v-for="each in produits" :key="each.nom" >
+    <div class="item"  v-for="each in produits" :key="each.imageUrl" >
       <CatalogItem :article="each" />
     </div>
 

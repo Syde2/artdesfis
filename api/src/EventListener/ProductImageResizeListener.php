@@ -48,6 +48,8 @@ class ProductImageResizeListener implements EventSubscriberInterface
             $produit->getImageUrl(),
             $produit->getImageUrl2(),
             $produit->getImageUrl3(),
+            $produit->getImageUrl4(),
+            $produit->getImageUrl5(),
         ];
 
         foreach ($imagePaths as $imagePath) {

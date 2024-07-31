@@ -74,6 +74,12 @@ class Produits
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $tag = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageUrl4 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageUrl5 = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -209,6 +215,30 @@ class Produits
     public function setTag(?string $tag): static
     {
         $this->tag = $tag;
+
+        return $this;
+    }
+
+    public function getImageUrl4(): ?string
+    {
+        return $this->imageUrl4;
+    }
+
+    public function setImageUrl4(?string $imageUrl4): static
+    {
+        $this->imageUrl4 = $imageUrl4;
+
+        return $this;
+    }
+
+    public function getImageUrl5(): ?string
+    {
+        return $this->imageUrl5;
+    }
+
+    public function setImageUrl5(?string $imageUrl5): static
+    {
+        $this->imageUrl5 = $imageUrl5;
 
         return $this;
     }
