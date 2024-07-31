@@ -75,9 +75,11 @@ class Produits
     private ?string $tag = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read:product'])]
     private ?string $imageUrl4 = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read:product'])]
     private ?string $imageUrl5 = null;
 
     public function getId(): ?int

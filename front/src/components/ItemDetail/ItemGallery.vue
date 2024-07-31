@@ -19,9 +19,11 @@ function toggleZoom(e) {
 const imageUrl = computed(() => process.env.API + '/uploads/images/' + props.article.imageUrl)
 const imageUrl2 = computed(() => props.article.imageUrl2 ? process.env.API + '/uploads/images/' + props.article.imageUrl2 : null)
 const imageUrl3 = computed(() => props.article.imageUrl3 ? process.env.API + '/uploads/images/' + props.article.imageUrl3 : null)
+const imageUrl4 = computed(() => props.article.imageUrl4 ? process.env.API + '/uploads/images/' + props.article.imageUrl4 : null)
+const imageUrl5 = computed(() => props.article.imageUrl5 ? process.env.API + '/uploads/images/' + props.article.imageUrl5 : null)
 
 const imageCount = computed(() => {
-  return [imageUrl.value, imageUrl2.value, imageUrl3.value].filter(Boolean).length
+  return [imageUrl.value, imageUrl2.value, imageUrl3.value, imageUrl4.value, imageUrl5.value ].filter(Boolean).length
 })
 
 </script>
@@ -36,6 +38,12 @@ const imageCount = computed(() => {
         <q-tooltip :delay="500" class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
       </q-img>
       <q-img v-if="props.article.imageUrl3" :src="imageUrl3" fit="contain" class="grid-item">
+        <q-tooltip :delay="500" class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
+      </q-img>
+      <q-img v-if="props.article.imageUrl4" :src="imageUrl4" fit="contain" class="grid-item">
+        <q-tooltip :delay="500" class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
+      </q-img>
+      <q-img v-if="props.article.imageUrl5" :src="imageUrl5" fit="contain" class="grid-item">
         <q-tooltip :delay="500" class="q-pa-sm text-caption"> cliquez pour agrandir</q-tooltip>
       </q-img>
     </div>
@@ -65,7 +73,13 @@ const imageCount = computed(() => {
 }
 
 .grid-3 {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
+}
+.grid-4 {
+  grid-template-columns: 1fr 1fr;
+}
+.grid-5 {
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .grid-item {

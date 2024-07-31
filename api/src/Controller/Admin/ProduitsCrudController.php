@@ -116,6 +116,16 @@ class ProduitsCrudController extends AbstractCrudController
                 ->setUploadDir('public/uploads/images')
                 ->hideOnIndex(),
                 
+                ImageField::new('imageUrl4',' 4e image')
+                ->setBasePath('uploads/images')
+                ->setUploadDir('public/uploads/images')
+                ->hideOnIndex(),
+                
+                ImageField::new('imageUrl5',' 5e image')
+                ->setBasePath('uploads/images')
+                ->setUploadDir('public/uploads/images')
+                ->hideOnIndex(),
+                
 
 
 
