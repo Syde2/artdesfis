@@ -31,3 +31,14 @@ services:
             $mailer: '@mailer'
             $texter: '@texter'
             $toPhone: '%env(ADMIN_PHONE)%'
+
+    App\Service\ImageResizeService:
+        arguments:
+            $maxWidth: 2016
+            $maxHeight: 1512
+            $logger: '@monolog.logger.image_resize'
+
+
+    App\EventListener\ProductImageResizeListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, method: resizeProductImages, priority: 64 }

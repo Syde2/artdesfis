@@ -21,6 +21,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use App\Service\ImageResizeService;
+use Psr\Log\LoggerInterface;
+use Doctrine\ORM\EntityManagerInterface;
+
+
 
 
 
@@ -29,6 +34,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 #[IsGranted('ROLE_USER')]
 class ProduitsCrudController extends AbstractCrudController
 {
+    private $imageResizeService;
+    private $logger;
+
+    public function __construct(ImageResizeService $imageResizeService, LoggerInterface $logger)
+    {
+        $this->imageResizeService = $imageResizeService;
+        $this->logger = $logger;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Produits::class;
@@ -128,7 +142,38 @@ class ProduitsCrudController extends AbstractCrudController
         ;
     }
 
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        $this->resizeImages($entityInstance);
+        parent::persistEntity($entityManager, $entityInstance);
+    }
 
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        $this->resizeImages($entityInstance);
+        parent::updateEntity($entityManager, $entityInstance);
+    }
 
-    
+    private function resizeImages(Produits $produit): void
+    {
+        $imagePaths = [
+            $produit->getImageUrl(),
+            $produit->getImageUrl2(),
+            $produit->getImageUrl3(),
+        ];
+
+        foreach ($imagePaths as $imagePath) {
+            if ($imagePath) {
+                try {
+                    $fullPath = $this->getParameter('kernel.project_dir') . '/public/uploads/images/' . $imagePath;
+                    $this->imageResizeService->resize($fullPath);
+                    $this->logger->info("Image redimensionnée avec succès: {$fullPath}");
+                } catch (\Exception $e) {
+                    $this->logger->error("Erreur lors du redimensionnement de l'image: {$fullPath}", [
+                        'exception' => $e->getMessage()
+                    ]);
+                }
+            }
+        }
+    }
 }

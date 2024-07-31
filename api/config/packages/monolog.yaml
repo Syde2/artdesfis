@@ -1,6 +1,15 @@
 monolog:
     channels:
         - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
+        - image_resize # Nouveau canal pour le redimensionnement d'images
+    
+    handlers:
+        image_resize:
+            type: rotating_file
+            path: '%kernel.logs_dir%/image_resize.log'
+            level: info
+            channels: ['image_resize']
+            max_files: 10
 
 when@dev:
     monolog:
