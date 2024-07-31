@@ -34,8 +34,10 @@ services:
 
     App\Service\ImageResizeService:
         arguments:
-            $maxWidth: 1008
-            $maxHeight: 756
+            $maxWidth: 2016
+            $maxHeight: 1512
+            $minWidth : 800 
+            $minHeight : 600
             $logger: '@monolog.logger.image_resize'
 
 

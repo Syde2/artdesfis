@@ -15,10 +15,12 @@ class ImageResizeService
 
 
 
-    public function __construct(int $maxWidth = 800, int $maxHeight = 600, LoggerInterface $logger, ImageManager $manager)
+    public function __construct(int $maxWidth = 2016, int $maxHeight = 1512,int $minWidth = 800, int $minHeight = 600,  LoggerInterface $logger, ImageManager $manager)
     {
         $this->maxWidth = $maxWidth;
+        $this->minWidth = $minWidth;
         $this->maxHeight = $maxHeight;
+        $this->minHeight = $minHeight;
         $this->logger = $logger;
         $this->manager = $manager;
         
@@ -32,21 +34,31 @@ class ImageResizeService
 
             $image = $this->manager->read($imagePath);
             $originalSize = $image->width() . 'x' . $image->height();
+            $halfWidth = $image->width() / 2;
+            $halfHeight = $image-height() / 2;
 
-            if ($image->width() > $this->maxWidth || $image->height() > $this->maxHeight) {
-                $image->resize($this->maxWidth, $this->maxHeight, function ($constraint) {
+            if($image->width() <= $this->minWidth || $image->height() <= $this->minHeight){
+                $this->logger->info("L'image ne nécessite pas de redimensionnement: {$imagePath}");
+            } 
+            else if ($halfWidth < $this->maxWidth || $halfHeight < $this->maxHeight) {
+                $this->logger->info("Le ratio de l'image va être divisé par 2 : {$imagePath}");
+                $image->resize($halfWidth, $halfHeight, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
 
+                $image->save();
+            } else {
+                $image->resize($this->maxWidth, $this->maxHeight, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
                 $image->save();
                 $newSize = $image->width() . 'x' . $image->height();
                 $this->logger->info("Image redimensionnée: {$imagePath}", [
                     'original_size' => $originalSize,
                     'new_size' => $newSize
                 ]);
-            } else {
-                $this->logger->info("L'image ne nécessite pas de redimensionnement: {$imagePath}");
             }
         } catch (\Exception $e) {
             $this->logger->error("Erreur lors du redimensionnement de l'image: {$imagePath}", [
