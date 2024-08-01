@@ -74,17 +74,25 @@ watch(searchFilter, (newValue) => {
 <template>
   <q-page>
     <PageHeader :width=150 />
-    <q-toolbar class=" q-mt-md row justify-center">
-
-      <TabBar @tabChange="handleTabChange" />
-      <!-- <SearchInput
+    <div style="position: relative;" >
+    <q-toolbar inset class="flex-center " >
+      <TabBar @tabChange="handleTabChange"  />
+      <SearchInput
         v-model="searchFilter" 
         @update:model-value="debouncedSearch" 
         @clear="fetchProduits" 
+        class="flex justify-end"
+        style="position: absolute; top: 0;"
         
-      /> -->
-
+      />
     </q-toolbar>
+
+ 
+
+
+
+  </div>
+
 
     
     <q-separator inset class="q-mb-md" />

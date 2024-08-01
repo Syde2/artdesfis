@@ -1,16 +1,16 @@
 <script setup>
-import {ref} from 'vue'
+import { ref } from 'vue'
 
 const search = defineModel()
 const emits = defineEmits(['search', 'clear'])
 
-const toggleSearch =ref(false)
+const toggleSearch = ref(false)
 
-function handleClick(){
+function handleClick() {
   console.log("CLICK")
   toggleSearch.value = true
 }
-function handleClear(){
+function handleClear() {
   toggleSearch.value = false
   const emits = defineEmits(['search', 'clear'])
 
@@ -19,21 +19,18 @@ function handleClear(){
 </script>
 
 <template>
-  <div class="row no-wrap">
-    <q-form  @submit="emits('search')">
-    <q-input  clearable @clear="emits('clear')" dense outlined rounded v-model="search" placeholder="Rechercher" class="bg-white gt-sm">
-      <template v-slot:append>
-          <q-icon v-show="!search"  name="search" color="primary" />
-        </template>
-    </q-input>
-  </q-form>
-  <q-toolbar class=" lt-sm row">
-    <q-icon v-show="!toggleSearch" size="sm" color="grey" name="search" class="cursor-pointer" @click="handleClick"  />
-    <q-input class="col-8" v-show="toggleSearch" clearable @clear=handleClear() dense outlined rounded v-model="search" placeholder="Rechercher" >
-    </q-input>
+  <q-toolbar class="flex row relative">
+    <q-input class=" col-10  bg-white " v-show="toggleSearch" clearable @clear=handleClear() dense outlined rounded
+        v-model="search" placeholder="Rechercher" style="height: 30px;" >
+      </q-input>
+      <q-icon size="sm" color="accent" name="search" class="cursor-pointer col-1  "
+        @click="handleClick">
+        <q-tooltip class="q-pa-sm text-caption " :delay="500">Rechercher</q-tooltip>
+      </q-icon>
 
-  </q-toolbar>  
 
-</div>
+
+  </q-toolbar>
+
 
 </template>
