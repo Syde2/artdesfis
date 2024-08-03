@@ -58,8 +58,9 @@ function handleClick() {
 
 .thumb-image {
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, .1);
+  border: 5px solid rgba(255, 255, 255, 0.923);
   border-radius: 1rem;
+
   box-shadow: 0 2px 4px #0000000d;
   height: auto;
   max-height: 150px;

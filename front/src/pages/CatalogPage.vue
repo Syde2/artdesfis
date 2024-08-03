@@ -8,8 +8,9 @@ import { debounce } from 'quasar';
 import PageHeader from 'src/components/IndexPage/PageHeader.vue';
 
 const produits = ref([]);
-const searchFilter = ref('');
+const searchFilter = ref(false);
 const loading = ref(false);
+const searchBarIsActive = ref(false)
 
 onBeforeMount(() => {
   fetchProduits();
@@ -61,6 +62,14 @@ async function handleTabChange(filter) {
   }
 }
 
+function handleActiveSearchBar(){
+  searchBarIsActive.value = true
+}
+
+function handleInactiveSearchBar(){
+  searchBarIsActive.value = false
+
+}
 
 const debouncedSearch = debounce(asyncSearch, 300);
 
@@ -75,12 +84,14 @@ watch(searchFilter, (newValue) => {
   <q-page>
     <PageHeader :width=150 />
     <div style="position: relative;" >
-    <q-toolbar inset class="flex-center " >
-      <TabBar @tabChange="handleTabChange"  />
+    <q-toolbar  class="flex-center " >
+      <TabBar  class="z-top" v-show="!searchBarIsActive"  @tabChange="handleTabChange"  />
       <SearchInput
         v-model="searchFilter" 
         @update:model-value="debouncedSearch" 
         @clear="fetchProduits" 
+        @searchBarActive=handleActiveSearchBar
+        @searchBarInactive = handleInactiveSearchBar
         class="flex justify-end"
         style="position: absolute; top: 0;"
         
