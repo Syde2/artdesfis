@@ -1,16 +1,18 @@
 <script setup>
 import { api } from 'src/boot/axios';
+import { onBeforeMount, ref, watch } from 'vue';
+import { debounce } from 'quasar';
 import CatalogGrid from 'src/components/CatalogPage/CatalogGrid.vue';
 import SearchInput from 'src/components/CatalogPage/SearchInput.vue';
 import TabBar from 'src/components/CatalogPage/TabBar.vue';
-import { onBeforeMount, ref, watch } from 'vue';
-import { debounce } from 'quasar';
 import PageHeader from 'src/components/IndexPage/PageHeader.vue';
 
 const produits = ref([]);
-const searchFilter = ref(false);
+const searchFilter = ref();
 const loading = ref(false);
 const searchBarIsActive = ref(false)
+const debouncedSearch = debounce(asyncSearch, 300);
+
 
 onBeforeMount(() => {
   fetchProduits();
@@ -18,7 +20,6 @@ onBeforeMount(() => {
 
 async function fetchProduits() {
   loading.value = true;
-  searchFilter.value = ''; // Réinitialise le filtre de recherche
   try {
     const res = await api.get('/produits');
     produits.value = res.data['hydra:member'];
@@ -62,22 +63,12 @@ async function handleTabChange(filter) {
   }
 }
 
-function handleActiveSearchBar(){
-  searchBarIsActive.value = true
-}
-
-function handleInactiveSearchBar(){
-  searchBarIsActive.value = false
-
-}
-
-const debouncedSearch = debounce(asyncSearch, 300);
-
-watch(searchFilter, (newValue) => {
-  if (newValue === '') {
-    fetchProduits();
-  }
-});
+// watch(searchFilter, (newValue) => {
+//   if (newValue === '' ) {
+//     console.log('WATCH ')
+//     fetchProduits();
+//   }
+// });
 </script>
 
 <template>
@@ -90,8 +81,8 @@ watch(searchFilter, (newValue) => {
         v-model="searchFilter" 
         @update:model-value="debouncedSearch" 
         @clear="fetchProduits" 
-        @searchBarActive=handleActiveSearchBar
-        @searchBarInactive = handleInactiveSearchBar
+        @searchBarActive='()=>  searchBarIsActive = true'
+        @searchBarInactive = '()=>  searchBarIsActive = false'
         class="flex justify-end"
         style="position: absolute; top: 0;"
         
@@ -102,10 +93,8 @@ watch(searchFilter, (newValue) => {
 
 
 
-  </div>
+    </div>
 
-
-    
     <q-separator inset class="q-mb-md" />
 
     <q-inner-loading :showing="loading">

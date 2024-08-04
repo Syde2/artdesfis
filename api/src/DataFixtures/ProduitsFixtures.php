@@ -46,10 +46,10 @@ class ProduitsFixtures extends Fixture implements DependentFixtureInterface
             $produit->setDescription($description );
             
             // Gestion des URLs d'images
-            $imageUrls = explode(';', $data['productImageUrl']);
-            if (!empty($imageUrls[0])) $produit->setImageUrl($imageUrls[0]);
-            if (!empty($imageUrls[1])) $produit->setImageUrl2($imageUrls[1]);
-            if (!empty($imageUrls[2])) $produit->setImageUrl3($imageUrls[2]);
+            // $imageUrls = explode(';', $data['productImageUrl']);
+            // if (!empty($imageUrls[0])) $produit->setImageUrl($imageUrls[0]);
+            // if (!empty($imageUrls[1])) $produit->setImageUrl2($imageUrls[1]);
+            // if (!empty($imageUrls[2])) $produit->setImageUrl3($imageUrls[2]);
             
             $produit->setPrix($data['price']*100);
             $produit->setStock((int)$data['inventory']);
