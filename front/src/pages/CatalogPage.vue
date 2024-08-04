@@ -62,13 +62,6 @@ async function handleTabChange(filter) {
     loading.value = false;
   }
 }
-
-// watch(searchFilter, (newValue) => {
-//   if (newValue === '' ) {
-//     console.log('WATCH ')
-//     fetchProduits();
-//   }
-// });
 </script>
 
 <template>

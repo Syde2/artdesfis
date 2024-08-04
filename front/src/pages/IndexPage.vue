@@ -36,9 +36,6 @@ const mobile =   $q.platform.is.mobile
   align-items: center;
 }
 
-
-
-
 .custom-button {
   font-family: 'Montserrat', sans-serif;
   padding: 0.5rem 1rem;

@@ -1,8 +1,24 @@
 <template>
 	<div class="flex justify-between full-width q-px-xl q-py-md ">
-		<q-img no-native-menu src="/images/img2.jpg" class="gallery-image" />
-		<q-img no-native-menu src="/images/img3.jpg" class="gallery-image " />
-		<q-img no-native-menu src="/images/img4.jpg" class="gallery-image " />
+		<q-img 
+			fetchpriority="high" 
+			no-spinner no-native-menu 
+			src="/images/img2.jpg" 
+			srcset="/images/img2_lowres.jpg 400w, /images/img2.jpg 800w"
+			class="gallery-image" />
+		<q-img 
+			fetchpriority="high" 
+			no-spinner no-native-menu 
+			src="/images/img3.jpg" 
+			srcset="/images/img3_lowres.jpg 400w, /images/img3.jpg 800w"
+			class="gallery-image " />
+		<q-img 
+			fetchpriority="high" 
+			no-spinner no-native-menu 
+			src="/images/img4.jpg" 
+			srcset="/images/img4_lowres.jpg 400w, /images/img4.jpg 800w"
+			class="gallery-image " />
+	
 	</div>
 </template>
 
