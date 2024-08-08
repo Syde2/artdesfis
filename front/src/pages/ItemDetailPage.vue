@@ -16,7 +16,7 @@ const mobile =   $q.platform.is.mobile
 </script>
 
 <template>
-  <q-dialog  full-width v-model="popup" backdrop-filter="blur(4px) saturate(150%)">
+  <q-dialog class="z-max"  full-width v-model="popup" backdrop-filter="blur(4px) saturate(150%)">
     <q-card class=" q-pa-sm flex bg-primary">
       <CloseButton v-model="popup" class="col-auto q-pa-sm" />
       <div class="full-width">
