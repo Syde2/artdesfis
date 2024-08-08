@@ -16,7 +16,7 @@
 			fetchpriority="high" 
 			no-spinner no-native-menu 
 			src="/images/img4.jpg" 
-			srcset="/images/img4_lowres.jpg 400w, /images/img.jpg 800w"
+			srcset="/images/img4_lowres.jpg 400w, /images/img4.jpg 800w"
 			class="gallery-image " />
 	
 	</div>
