@@ -49,12 +49,15 @@ const imageCount = computed(() => {
     </div>
   </q-card-section>
 
-  <q-dialog full-width full-height v-model="zoomModel">
+  <q-dialog class="z-max"  full-width full-height v-model="zoomModel">
     <div @click="zoomModel = false">
       <q-img :src="zoomedImg">
+        <q-btn flat color="white" icon="close" class=" cursor-pointer absolute-top-right" />
+
       </q-img>
     </div>
   </q-dialog>
+
 </template>
 
 <style scoped>
