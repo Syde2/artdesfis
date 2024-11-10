@@ -5,8 +5,6 @@ const path = require('path');
 
 module.exports = configure(function (ctx) {
   return {
-
-
     // https://v2.quasar.dev/quasar-cli/prefetch-feature
     // preFetch: true,
 
@@ -44,7 +42,7 @@ module.exports = configure(function (ctx) {
         node: 'node16'
       },
 
-      vueRouterMode: 'history', // available values: 'hash', 'history'
+      vueRouterMode: 'hash', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -52,7 +50,7 @@ module.exports = configure(function (ctx) {
        //rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
        publicPath: '/',
-       productName:'Art des fils ',
+       productName:'Art des fils',
       // analyze: true,
       env: {
         API: ctx.dev
