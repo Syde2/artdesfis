@@ -93,7 +93,7 @@ class ContactCreationListener
         // $options
     );
     
-    // $this->texter->send($sms);
+    $this->texter->send($sms);
         
     }
 }
