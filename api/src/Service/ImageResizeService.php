@@ -8,10 +8,10 @@ use Psr\Log\LoggerInterface;
 
 class ImageResizeService
 {
+    private ImageManager $manager;
     private int $maxWidth;
     private int $maxHeight;
     private LoggerInterface $logger;
-    private ImageManager $manager;
 
 
 

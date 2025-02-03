@@ -7,9 +7,7 @@ import { useRouter } from 'vue-router';
 const props = defineProps({
     produit: Object
 })
-
 const $q = useQuasar()
-
 const email = ref(null)
 const article = ref('')
 const reference = ref('')
@@ -18,6 +16,7 @@ const accept = ref(false)
 const router = useRouter()
 
 watch(() => props.produit, (newProduit) => {
+    console.log('WATCHER', props.produit)
     if (newProduit) {
         article.value = newProduit.nom
         reference.value = newProduit['@id']
@@ -43,6 +42,8 @@ async function PostForm() {
     const payload = {
         "email": email.value,
         "message": commentaire.value,
+        "nomArticle" : article.value,
+        'referenceArticle' : reference.value
     }
     if (article.value) {
         payload.nomArticle = article.value
