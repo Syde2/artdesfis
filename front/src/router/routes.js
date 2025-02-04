@@ -9,6 +9,8 @@ const routes = [
       { path: '/catalogue/:tag', component: () => import('pages/SpecialTagPage.vue') },
       { path: '/contact', component: () => import('pages/ContactPage.vue') },
       { path: '/contact/:id', component: () => import('pages/ContactPage.vue') },
+      { path: '/produit/:id', component: () => import('pages/ProductPage.vue') },
+
 
 
     ]

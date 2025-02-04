@@ -14,3 +14,4 @@ const props = defineProps({
     <ContactVariante :id=props.id />
   </div>
 </template> 
+x

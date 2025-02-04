@@ -36,11 +36,14 @@ class ContactCreationListener
             return;
         }
 
+        $articleLink = 'http://artdesfils.fr/#/produit/' . basename($contact->getReferenceArticle());
+
+
         // Send email
         $email = (new Email())
         ->from($this->toEmail)
         ->to($this->toEmail)
-        ->subject($contact->getNomArticle() . ' - ' . $contact->getReferenceArticle())
+        ->subject( " Demande d'information concernant ". $contact->getNomArticle() )
         ->html("
             <html>
                 <body style='font-family: Arial, sans-serif; color: #333;'>
@@ -56,6 +59,7 @@ class ContactCreationListener
                                 <p>Vous avez reçu une nouvelle demande d'informations concernant l'article suivant :</p>
                                 <p><strong>Nom de l'article :</strong> {$contact->getNomArticle()}</p>
                                 <p><strong>Référence de l'article :</strong> {$contact->getReferenceArticle()}</p>
+                                <p><strong>Voir l'article :</strong> <a href='{$articleLink}'>Lien</a></p>
                                 <p><strong>Adresse mail du contact :</strong> {$contact->getEmail() }</p>
                                 <hr style='border: none; border-top: 1px solid #ddd; margin: 20px 0;' />
                                 <p><strong>Message :</strong></p>

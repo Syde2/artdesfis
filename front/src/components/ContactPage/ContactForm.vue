@@ -84,9 +84,7 @@ function onReset() {
 
 <template>
     <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md q-pa-md">
-        {{ article }}
-        {{ reference }}
-
+    
         <div v-if="article" class="row q-px-md">
             <q-input class="col-8" borderless type="text" v-model="article" label="Produit souhaité" readonly />
             <q-input class="col-4" borderless type="text" v-model="reference" label="Reference" readonly />

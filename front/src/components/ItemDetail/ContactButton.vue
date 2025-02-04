@@ -2,7 +2,8 @@
 const props = defineProps({
   id:String
 })
-const id = props.id.charAt(props.id.length-1)
+const id = props.id.split("/").pop();
+
 </script>
 
 <template>
